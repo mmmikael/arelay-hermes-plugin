@@ -70,3 +70,7 @@ delivered to arelay:https://arelay.app via live adapter
 
 - [arelay-skills](https://github.com/mmmikael/arelay-skills) — `agent-relay` skill for interactive API deliveries
 - [arelay](https://github.com/mmmikael/arelay) — Agent Relay app
+
+## License
+
+MIT — see [LICENSE](LICENSE).
