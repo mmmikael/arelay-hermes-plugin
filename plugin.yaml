@@ -1,0 +1,22 @@
+name: agent-relay-platform
+label: Agent Relay
+kind: platform
+version: 1.0.0
+description: >
+  Hermes platform plugin that delivers cron job output to the Agent Relay
+  encrypted inbox. Requires Hermes Agent v0.13+ and Node.js 18+ on PATH.
+author: mmmikael
+requires_env:
+  - name: AGENT_API_TOKEN
+    description: "Bearer token from Agent Relay Account -> Agent tokens"
+    prompt: "Agent Relay API token"
+    password: true
+optional_env:
+  - name: AGENT_RELAY_URL
+    description: "Agent Relay base URL (default: https://arelay.app)"
+    prompt: "Agent Relay URL"
+    password: false
+  - name: AGENT_RELAY_HOME_CHANNEL
+    description: "Cron delivery target marker (defaults to AGENT_RELAY_URL or https://arelay.app)"
+    prompt: "Agent Relay cron target marker"
+    password: false
