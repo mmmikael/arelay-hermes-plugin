@@ -68,7 +68,21 @@ delivered to arelay:https://arelay.app via live adapter
 
 ## Development
 
-`lib/e2ee.mjs` is vendored from [arelay-skills](https://github.com/mmmikael/arelay-skills) (`skills/agent-relay/scripts/lib/e2ee.mjs`). Keep it in sync when crypto changes.
+`lib/e2ee.mjs` is **vendored in this repo** (the plugin is self-contained for `hermes plugins install`).
+The canonical source is [arelay-skills](https://github.com/mmmikael/arelay-skills) (`skills/agent-relay/scripts/lib/e2ee.mjs`).
+
+After crypto changes in arelay-skills, sync into this repo:
+
+```bash
+# from this repo (requires arelay-skills cloned as ../arelay-skills)
+./scripts/sync-e2ee-lib.sh
+```
+
+Verify copies match:
+
+```bash
+./scripts/verify-e2ee-lib.sh
+```
 
 Smoke tests (from repo root):
 
