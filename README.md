@@ -66,31 +66,6 @@ Successful delivery logs:
 delivered to arelay:https://arelay.app via live adapter
 ```
 
-## Development
-
-`lib/e2ee.mjs` is **vendored in this repo** (the plugin is self-contained for `hermes plugins install`).
-The canonical source is [arelay-skills](https://github.com/mmmikael/arelay-skills) (`skills/agent-relay/scripts/lib/e2ee.mjs`).
-
-After crypto changes in arelay-skills, sync into this repo:
-
-```bash
-# from this repo (requires arelay-skills cloned as ../arelay-skills)
-./scripts/sync-e2ee-lib.sh
-```
-
-Verify copies match:
-
-```bash
-./scripts/verify-e2ee-lib.sh
-```
-
-Smoke tests (from repo root):
-
-```bash
-node e2ee_cron_deliver.mjs --help
-printf '{}' | node e2ee_cron_deliver.mjs --stdin-json   # expects AGENT_API_TOKEN is required
-```
-
 ## Related
 
 - [arelay-skills](https://github.com/mmmikael/arelay-skills) — `agent-relay` skill for interactive API deliveries
