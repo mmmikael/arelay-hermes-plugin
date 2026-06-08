@@ -19,6 +19,7 @@ from gateway.config import Platform
 from gateway.platforms.base import BasePlatformAdapter, SendResult
 
 DEFAULT_RELAY_URL = "https://arelay.app"
+DEFAULT_OUTPUT_FILENAME = "cron-output.txt"
 HELPER_SCRIPT = Path(__file__).with_name("e2ee_cron_deliver.mjs")
 HELPER_TIMEOUT_SECONDS = 300
 
@@ -29,6 +30,16 @@ def _relay_url() -> str:
 
 def _api_token() -> str:
     return os.getenv("AGENT_API_TOKEN", "").strip()
+
+
+def _output_filename() -> str:
+    name = os.getenv("AGENT_RELAY_OUTPUT_FILENAME", "").strip()
+    return name or DEFAULT_OUTPUT_FILENAME
+
+
+def _output_content_type() -> Optional[str]:
+    value = os.getenv("AGENT_RELAY_OUTPUT_CONTENT_TYPE", "").strip()
+    return value or None
 
 
 def _node_path() -> Optional[str]:
@@ -163,11 +174,13 @@ async def _standalone_deliver_to_arelay(
     payload = {
         "title": _title_from_message(message),
         "summary": "Uploaded by Hermes cron via Agent Relay.",
-        "filename": "cron-output.md",
-        "contentType": "text/markdown",
+        "filename": _output_filename(),
         "message": message,
         "mediaFiles": list(media_files or []),
     }
+    content_type = _output_content_type()
+    if content_type:
+        payload["contentType"] = content_type
     result = await _run_helper(payload)
     if result.get("error"):
         return result

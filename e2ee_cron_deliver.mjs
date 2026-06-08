@@ -32,11 +32,14 @@ Input JSON:
   {
     "title": "Hermes cron delivery",
     "summary": "Uploaded by Hermes cron via Agent Relay.",
-    "filename": "cron-output.md",
-    "contentType": "text/markdown",
-    "message": "# Report",
+    "filename": "cron-output.txt",
+    "contentType": "text/plain",
+    "message": "report body",
     "mediaFiles": ["/path/to/file.png"]
   }
+
+  filename defaults to cron-output.txt. contentType is optional and, when
+  omitted, is derived from the filename extension (e.g. .html, .pdf, .md).
 
 Environment:
   AGENT_RELAY_URL    Agent Relay base URL (default: ${defaultRelayUrl()})
@@ -102,8 +105,8 @@ async function deliver(input) {
 
 	const title = String(input.title || 'Hermes cron delivery');
 	const summary = String(input.summary || 'Uploaded by Hermes cron via Agent Relay.');
-	const filename = String(input.filename || 'cron-output.md');
-	const contentType = String(input.contentType || 'text/markdown');
+	const filename = String(input.filename || 'cron-output.txt');
+	const contentType = String(input.contentType || contentTypeForPath(filename));
 	const message = String(input.message || '');
 	const mediaFiles = input.mediaFiles || [];
 
