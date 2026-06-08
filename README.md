@@ -49,13 +49,20 @@ text response is uploaded as `cron-output.txt` (`text/plain` by default), plus a
 
 ### Rich payloads (HTML, PDF, images, …)
 
-The inbox previews each artifact by its filename and content type. To deliver a
-rich format, have the agent **write a real file** and attach it with `MEDIA:` —
-its extension determines the type and preview (`report.html` → HTML, `report.pdf`
-→ PDF, `report.md` → rendered Markdown). Prefer this over relying on the inline
-text response, which is treated as plain text.
+The inbox previews each artifact by its filename and content type, and the plugin
+already tells the agent (via its platform hint) to deliver rich formats as files.
+So the cron prompt stays simple — just ask for the format:
 
-To rename or retype the inline text artifact itself, set in `~/.hermes/.env`:
+```bash
+/cron add "0 9 * * *" "Generate the daily France news briefing as an HTML page." --deliver arelay
+```
+
+The agent writes the file and references it with `MEDIA:/path/report.html`; the
+extension determines the type and preview (`report.html` → HTML, `report.pdf` →
+PDF, `report.md` → rendered Markdown). The text reply is uploaded as a plain-text
+artifact alongside it.
+
+To rename or retype that inline text artifact, set in `~/.hermes/.env`:
 
 ```bash
 AGENT_RELAY_OUTPUT_FILENAME=cron-output.md      # optional; default cron-output.txt

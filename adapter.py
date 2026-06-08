@@ -262,6 +262,11 @@ def register(ctx) -> None:
         platform_hint=(
             "Agent Relay is a one-way encrypted inbox. Do not expect replies from "
             "this platform; deliver complete artifacts or reports. "
+            "Your text reply is uploaded as a plain-text artifact. For any rich "
+            "format (HTML, PDF, images, CSV), write the content to a file and "
+            "reference it with MEDIA:/absolute/path.ext (e.g. MEDIA:/tmp/report.html) "
+            "instead of pasting it inline or in code fences — the inbox derives the "
+            "preview and download type from the file extension. "
             "Requires Hermes Agent v0.13+ and Node.js 18+."
         ),
     )
