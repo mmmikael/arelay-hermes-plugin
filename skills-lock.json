@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-relay": {
+      "source": "mmmikael/arelay-skills",
+      "sourceType": "github",
+      "skillPath": "skills/agent-relay/SKILL.md",
+      "computedHash": "7621908287c4a5a26e3f2e80cc6581acc2f36f3c69404288d585e9f233b0baba"
+    }
+  }
+}
